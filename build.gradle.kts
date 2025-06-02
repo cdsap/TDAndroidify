@@ -12,3 +12,17 @@ plugins {
     alias(libs.plugins.android.test) apply false
     alias(libs.plugins.baselineprofile) apply false
 }
+
+
+allprojects {
+    tasks.withType<Test>().configureEach {
+        useJUnitPlatform()
+        develocity.testDistribution {
+            enabled.set(true)
+            remoteExecutionPreferred.set(true)
+            maxLocalExecutors.set(0)
+            requirements.set(setOf("os=linux", "jdk=21"))
+        }
+
+    }
+}
