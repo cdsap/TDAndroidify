@@ -21,7 +21,7 @@ allprojects {
             enabled.set(true)
             remoteExecutionPreferred.set(true)
             maxLocalExecutors.set(0)
-            requirements.set(setOf("os=linux", "jdk=21"))
+            requirements.set(setOf("os=linux", "jdk=17"))
         }
 
     }
