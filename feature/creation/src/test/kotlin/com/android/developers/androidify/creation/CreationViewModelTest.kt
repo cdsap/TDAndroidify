@@ -34,6 +34,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -52,6 +53,18 @@ class CreationViewModelTest {
 
     @Before
     fun setup() {
+        viewModel = CreationViewModel(
+            internetConnectivityManager,
+            imageGenerationRepository,
+            TestTextGenerationRepository(),
+            TestFileProvider(),
+            UnconfinedTestDispatcher(),
+            context = RuntimeEnvironment.getApplication(),
+        )
+    }
+
+    @BeforeTest
+    fun setup2() {
         viewModel = CreationViewModel(
             internetConnectivityManager,
             imageGenerationRepository,
