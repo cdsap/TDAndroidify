@@ -43,23 +43,20 @@ jobs:
       - name: Build debug APK
         run: ./gradlew assembleDebug --no-configuration-cache
 
-      - name: Apply Spotless
-        run: ./gradlew spotlessApply --init-script gradle/init.gradle.kts --no-configuration-cache
-
       - name: Commit Spotless changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 🤖 Apply Spotless formatting
           file_pattern: '**/*.kt **/*.kts **/*.java **/*.xml'
 
-      - name: Verify Screenshot Tests (AndroidX)
-        run: ./gradlew validateDebugScreenshotTest
 
       - name: Run local unit tests
         run: ./gradlew testDebugUnitTest
         env:
             DEVELOCITY_ACCESS_KEY: ${{ secrets.DV_ACCESS_KEY }}
 
+      - name: Verify Screenshot Tests (AndroidX)
+        run: ./gradlew validateDebugScreenshotTest
 
       - name: Upload build outputs (APKs)
         if: ${{ !cancelled() }}
